@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { data } from './data';
 import { Wishlist, Cart } from './components';
 class App extends Component {
-  state = { list: data, shoppingCart: [] };
+  state = { list: data, newList: [] };
 
-  addToList = (id, status) => _ => {
+  addToList = id => _ => {
     const { list } = this.state;
-    if (list[id].id === id) list[id].inCart = status;
-    this.setState({ list });
+    const newList = list.map(item => (item.id === id ? { ...item, inCart: !item.inCart } : item));
+
+    this.setState({ list: newList });
   };
 
   render() {
