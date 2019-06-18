@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { data } from './data';
 import { Wishlist, Cart } from './components';
 class App extends Component {
-  state = { list: data, newList: [] };
+  state = { list: data };
 
   addToList = id => _ => {
     const { list } = this.state;
