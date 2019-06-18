@@ -4,7 +4,7 @@ import { Wishlist, Cart, Form } from './components';
 class App extends Component {
   state = { list: data };
 
-  addToList = id => _ => {
+  updateItemStatus = id => _ => {
     const { list } = this.state;
     const newList = list.map(item => (item.id === id ? { ...item, inCart: !item.inCart } : item));
     this.setState({ list: newList });
@@ -31,8 +31,8 @@ class App extends Component {
       <div>
         <h1>My Shopping List</h1>
         <Form addNewItem={this.addNewItem} list={list} />
-        <Wishlist wishList={wishList} addToList={this.addToList} removeItem={this.removeItem} />
-        <Cart shoppingCart={shoppingCart} addToList={this.addToList} removeItem={this.removeItem} />
+        <Wishlist wishList={wishList} updateItemStatus={this.updateItemStatus} removeItem={this.removeItem} />
+        <Cart shoppingCart={shoppingCart} updateItemStatus={this.updateItemStatus} removeItem={this.removeItem} />
       </div>
     );
   }
