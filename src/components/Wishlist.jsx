@@ -1,15 +1,15 @@
 import React from 'react';
 import { ListItem } from '.';
 
-const Wishlist = ({ list = [], addToCart }) => (
+const Wishlist = ({ wishList = [], addToList }) => (
   <>
     <h1>Wishlist</h1>
     <ul>
-      {list.map(item => (
+      {wishList.map(item => (
         <ListItem
           name={item.name}
           description={item.description}
-          toggleList={addToCart(item.id)}
+          toggleList={addToList(item.id, true)}
           itemLocation={'cart'}
         />
       ))}

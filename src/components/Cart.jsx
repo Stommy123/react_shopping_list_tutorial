@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListItem } from '.';
 
-const Cart = ({ shoppingCart, addToWishlist }) => (
+const Cart = ({ shoppingCart, addToList }) => (
   <div>
     <h1>Shopping Cart</h1>
 
@@ -10,7 +10,7 @@ const Cart = ({ shoppingCart, addToWishlist }) => (
         <ListItem
           name={item.name}
           description={item.description}
-          toggleList={addToWishlist(item.id)}
+          toggleList={addToList(item.id, false)}
           itemLocation={'wishlist'}
         />
       ))}
