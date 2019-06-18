@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { data } from './data';
-import { ShoppingList } from './components';
+import { Wishlist, Cart } from './components';
 class App extends Component {
   state = { list: data };
 
@@ -8,7 +8,8 @@ class App extends Component {
     const { list } = this.state;
     return (
       <div>
-        <ShoppingList list={list} />
+        <Wishlist list={list} />
+        <Cart />
       </div>
     );
   }
