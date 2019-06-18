@@ -16,6 +16,7 @@ class App extends Component {
     const wishList = list.filter(item => !item.inCart);
     return (
       <div>
+        <h1>My Shopping List</h1>
         <Wishlist wishList={wishList} addToList={this.addToList} />
         <Cart shoppingCart={shoppingCart} addToList={this.addToList} />
       </div>
