@@ -24,11 +24,6 @@ class Form extends Component {
     this.setState({ isDuplicate });
   };
 
-  toggleForm = boolean => {
-    document.querySelector('#description-input').disabled = boolean;
-    document.querySelector('#submit-btn').disabled = boolean;
-  };
-
   render() {
     const { name, description, isDuplicate } = this.state;
     return (
