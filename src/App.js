@@ -13,6 +13,7 @@ class App extends Component {
   addNewItem = formData => {
     const { list } = this.state;
     const newList = [...list, formData];
+    console.log(newList);
     this.setState({ list: newList });
   };
 

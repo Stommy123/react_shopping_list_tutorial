@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
 
 class Form extends Component {
-  state = { name: String(), description: String(), inCart: false };
+  state = {
+    id: Math.ceil(Math.random() * 100000),
+    name: String(),
+    description: String(),
+    inCart: false
+  };
 
   handleSubmit = e => {
     e.preventDefault();
     const { addNewItem } = this.props;
-    this.checkForDuplicates(this.state.name)
-      ? alert('Item already exists. Please enter a different item.')
-      : addNewItem && addNewItem(this.state);
+    addNewItem && addNewItem(this.state);
     this.setState({ name: String(), description: String() });
   };
 
   handleInputChange = field => e => this.setState({ [field]: e.target.value });
 
-  checkForDuplicates = newItem => this.props.list.find(item => item['name'].toLowerCase() === newItem.toLowerCase());
+  checkForDuplicates = newItem => e => {
+    const { list } = this.props;
+    const checkDuplicate = list.some(item => item.name.toLowerCase() === newItem.toLowerCase());
+    if (checkDuplicate) {
+      this.toggleForm(true);
+      alert('Item already exists. Please enter a different item.');
+    } else {
+      this.toggleForm(false);
+    }
+  };
+
+  toggleForm = boolean => {
+    document.querySelector('#description-input').disabled = boolean;
+    document.querySelector('#submit-btn').disabled = boolean;
+  };
 
   render() {
     const { name, description } = this.state;
@@ -22,13 +39,23 @@ class Form extends Component {
       <form onSubmit={this.handleSubmit}>
         <div>
           <label>Name: </label>
-          <input type="text" onChange={this.handleInputChange('name')} value={name} />
+          <input
+            type="text"
+            onChange={this.handleInputChange('name')}
+            onBlur={this.checkForDuplicates(name)}
+            value={name}
+          />
         </div>
         <div>
           <label>Description: </label>
-          <textarea type="text" onChange={this.handleInputChange('description')} value={description} />
+          <textarea
+            id="description-input"
+            type="text"
+            onChange={this.handleInputChange('description')}
+            value={description}
+          />
         </div>
-        <input type="submit" value="Add item" />
+        <input id="submit-btn" type="submit" value="Add item" />
       </form>
     );
   }
