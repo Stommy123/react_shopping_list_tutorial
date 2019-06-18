@@ -7,6 +7,7 @@ const Cart = ({ shoppingCart, addToList }) => (
     <ul>
       {shoppingCart.map(item => (
         <ListItem
+          key={item.id}
           name={item.name}
           description={item.description}
           toggleList={addToList(item.id)}

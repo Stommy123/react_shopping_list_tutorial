@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 
 class Form extends Component {
   state = {
-    id: Math.ceil(Math.random() * 100000),
     name: String(),
     description: String(),
-    inCart: false
+    isDuplicate: false
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const { addNewItem } = this.props;
-    addNewItem && addNewItem(this.state);
+    const { name, description } = this.state;
+    addNewItem && addNewItem({ name, description });
     this.setState({ name: String(), description: String() });
   };
 
@@ -19,13 +19,9 @@ class Form extends Component {
 
   checkForDuplicates = newItem => e => {
     const { list } = this.props;
-    const checkDuplicate = list.some(item => item.name.toLowerCase() === newItem.toLowerCase());
-    if (checkDuplicate) {
-      this.toggleForm(true);
-      alert('Item already exists. Please enter a different item.');
-    } else {
-      this.toggleForm(false);
-    }
+    const isDuplicate = list.some(item => item.name.toLowerCase() === newItem.toLowerCase());
+    isDuplicate && alert('Item already exists. Please enter a different item');
+    this.setState({ isDuplicate });
   };
 
   toggleForm = boolean => {
@@ -34,7 +30,7 @@ class Form extends Component {
   };
 
   render() {
-    const { name, description } = this.state;
+    const { name, description, isDuplicate } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
@@ -55,7 +51,7 @@ class Form extends Component {
             value={description}
           />
         </div>
-        <input id="submit-btn" type="submit" value="Add item" />
+        <input id="submit-btn" type="submit" value="Add Item" disabled={isDuplicate} />
       </form>
     );
   }

@@ -12,8 +12,8 @@ class App extends Component {
 
   addNewItem = formData => {
     const { list } = this.state;
-    const newList = [...list, formData];
-    console.log(newList);
+    const newItem = { ...formData, id: Math.ceil(Math.random() * 100000), inCart: false };
+    const newList = [...list, newItem];
     this.setState({ list: newList });
   };
 
