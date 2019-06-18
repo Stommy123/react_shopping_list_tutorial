@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import { data } from './data';
-import { ShoppingList } from './components';
+import { Wishlist, Cart } from './components';
 class App extends Component {
   state = { list: data };
 
+  addToList = id => _ => {
+    const { list } = this.state;
+    const newList = list.map(item => (item.id === id ? { ...item, inCart: !item.inCart } : item));
+    this.setState({ list: newList });
+  };
+
   render() {
     const { list } = this.state;
+    const shoppingCart = list.filter(item => item.inCart);
+    const wishList = list.filter(item => !item.inCart);
     return (
       <div>
-        <ShoppingList list={list} />
+        <Wishlist wishList={wishList} addToList={this.addToList} />
+        <Cart shoppingCart={shoppingCart} addToList={this.addToList} />
       </div>
     );
   }
