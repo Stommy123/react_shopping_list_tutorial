@@ -7,7 +7,6 @@ class App extends Component {
   addToList = id => _ => {
     const { list } = this.state;
     const newList = list.map(item => (item.id === id ? { ...item, inCart: !item.inCart } : item));
-
     this.setState({ list: newList });
   };
 

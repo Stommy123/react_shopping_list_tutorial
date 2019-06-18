@@ -10,7 +10,7 @@ const Cart = ({ shoppingCart, addToList }) => (
           name={item.name}
           description={item.description}
           toggleList={addToList(item.id)}
-          itemLocation={'wishlist'}
+          itemLocation="wishlist"
         />
       ))}
     </ul>
