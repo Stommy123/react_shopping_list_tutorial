@@ -1,5 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { data } from './data';
+import { ShoppingList } from './components';
+class App extends Component {
+  state = { list: data };
 
-const App = _ => <h1>HELLO WORLD</h1>
+  render() {
+    const { list } = this.state;
+    return (
+      <div>
+        <ShoppingList list={list} />
+      </div>
+    );
+  }
+}
 
 export default App;
