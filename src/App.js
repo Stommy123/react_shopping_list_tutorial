@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { data } from './data';
-import { Wishlist, Cart } from './components';
+import { Wishlist, Cart, Form } from './components';
 class App extends Component {
   state = { list: data };
 
   addToList = id => _ => {
     const { list } = this.state;
     const newList = list.map(item => (item.id === id ? { ...item, inCart: !item.inCart } : item));
+    this.setState({ list: newList });
+  };
+
+  addNewItem = formData => {
+    const { list } = this.state;
+    const newItem = { ...formData, id: Math.ceil(Math.random() * 100000), inCart: false };
+    const newList = [...list, newItem];
     this.setState({ list: newList });
   };
 
@@ -17,6 +24,7 @@ class App extends Component {
     return (
       <div>
         <h1>My Shopping List</h1>
+        <Form addNewItem={this.addNewItem} list={list} />
         <Wishlist wishList={wishList} addToList={this.addToList} />
         <Cart shoppingCart={shoppingCart} addToList={this.addToList} />
       </div>
