@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListItem } from '.';
 
-const Wishlist = ({ wishList = [], addToList }) => (
+const Wishlist = ({ wishList = [], addToList, removeItem }) => (
   <div>
     <h1>Wishlist</h1>
     <ul>
@@ -12,6 +12,7 @@ const Wishlist = ({ wishList = [], addToList }) => (
           description={item.description}
           toggleList={addToList(item.id)}
           itemLocation="cart"
+          removeItem={removeItem(item.id)}
         />
       ))}
     </ul>

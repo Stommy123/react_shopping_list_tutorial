@@ -17,6 +17,12 @@ class App extends Component {
     this.setState({ list: newList });
   };
 
+  removeItem = id => _ => {
+    const { list } = this.state;
+    const filteredList = list.filter(item => item.id !== id);
+    this.setState({ list: filteredList });
+  };
+
   render() {
     const { list } = this.state;
     const shoppingCart = list.filter(item => item.inCart);
@@ -25,8 +31,8 @@ class App extends Component {
       <div>
         <h1>My Shopping List</h1>
         <Form addNewItem={this.addNewItem} list={list} />
-        <Wishlist wishList={wishList} addToList={this.addToList} />
-        <Cart shoppingCart={shoppingCart} addToList={this.addToList} />
+        <Wishlist wishList={wishList} addToList={this.addToList} removeItem={this.removeItem} />
+        <Cart shoppingCart={shoppingCart} addToList={this.addToList} removeItem={this.removeItem} />
       </div>
     );
   }
